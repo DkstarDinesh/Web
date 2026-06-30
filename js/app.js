@@ -1,184 +1,240 @@
-/* ==========================================
-   Fine Aircon
-   app.js
-========================================== */
+/*==================================================
+ Fine Aircon Jaipur V2
+ App.js
+==================================================*/
 
 /* Loader */
 
-window.addEventListener("load", function () {
+window.addEventListener("load",()=>{
 
-    const loader = document.getElementById("loader");
+const loader=document.getElementById("loader");
 
-    if (loader) {
+if(loader){
 
-        loader.style.opacity = "0";
+setTimeout(()=>{
 
-        setTimeout(() => {
+loader.style.opacity="0";
 
-            loader.style.display = "none";
+loader.style.visibility="hidden";
 
-        }, 500);
-
-    }
-
-});
-
-
-/* Mobile Menu */
-
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.querySelector("nav");
-
-if (menuBtn && nav) {
-
-    menuBtn.addEventListener("click", function () {
-
-        nav.classList.toggle("active");
-
-    });
+},700);
 
 }
 
-
-/* Close Menu */
-
-document.querySelectorAll("nav a").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        if (nav) {
-
-            nav.classList.remove("active");
-
-        }
-
-    });
-
 });
-
 
 /* Sticky Header */
 
-const header = document.querySelector("header");
+const header=document.querySelector("header");
 
-window.addEventListener("scroll", function () {
+window.addEventListener("scroll",()=>{
 
-    if (!header) return;
+if(window.scrollY>50){
 
-    if (window.scrollY > 50) {
+header.classList.add("scrolled");
 
-        header.classList.add("sticky");
+}else{
 
-    } else {
+header.classList.remove("scrolled");
 
-        header.classList.remove("sticky");
-
-    }
+}
 
 });
 
+/* Mobile Menu */
 
-/* Active Navigation */
+const menuBtn=document.getElementById("menuBtn");
 
-const currentPage = location.pathname.split("/").pop();
+const nav=document.getElementById("navbar");
 
-document.querySelectorAll("nav a").forEach(link => {
+menuBtn.addEventListener("click",()=>{
 
-    if (link.getAttribute("href") === currentPage) {
+nav.classList.toggle("active");
 
-        link.classList.add("active");
+menuBtn.innerHTML=nav.classList.contains("active")
 
-    }
+?'<i class="fa-solid fa-xmark"></i>'
 
-});
-
-
-/* Smooth Scroll */
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-    anchor.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-
-            target.scrollIntoView({
-
-                behavior: "smooth"
-
-            });
-
-        }
-
-    });
-
-});
-/* ==========================================
-   Back To Top Button
-========================================== */
-
-const topBtn = document.createElement("button");
-
-topBtn.id = "topBtn";
-topBtn.innerHTML = "↑";
-
-document.body.appendChild(topBtn);
-
-topBtn.style.cssText = `
-position:fixed;
-bottom:25px;
-left:25px;
-width:50px;
-height:50px;
-border:none;
-border-radius:50%;
-background:#007BFF;
-color:#fff;
-font-size:22px;
-cursor:pointer;
-display:none;
-box-shadow:0 8px 20px rgba(0,0,0,.2);
-z-index:999;
-transition:.3s;
-`;
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 300){
-
-        topBtn.style.display = "block";
-
-    }else{
-
-        topBtn.style.display = "none";
-
-    }
+:'<i class="fa-solid fa-bars"></i>';
 
 });
 
-topBtn.addEventListener("click",()=>{
+document.querySelectorAll("#navbar a").forEach(link=>{
 
-    window.scrollTo({
+link.onclick=()=>{
 
-        top:0,
+nav.classList.remove("active");
 
-        behavior:"smooth"
+menuBtn.innerHTML='<i class="fa-solid fa-bars"></i>';
 
-    });
+};
 
 });
 
+/* Scroll Top */
 
-/* ==========================================
-   Scroll Reveal
-========================================== */
+const scrollBtn=document.getElementById("scrollTop");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>400){
+
+scrollBtn.style.display="flex";
+
+}else{
+
+scrollBtn.style.display="none";
+
+}
+
+});
+
+scrollBtn.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+/* Counter */
+
+const counters=document.querySelectorAll(".counter-box h2");
+
+const counterObserver=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const counter=entry.target;
+
+const target=parseInt(counter.innerText);
+
+let value=0;
+
+const speed=Math.ceil(target/80);
+
+const update=()=>{
+
+value+=speed;
+
+if(value>=target){
+
+counter.innerText=counter.innerText.includes("+")?
+
+target+"+":target;
+
+}else{
+
+counter.innerText=counter.innerText.includes("+")?
+
+value+"+":value;
+
+requestAnimationFrame(update);
+
+}
+
+};
+
+update();
+
+counterObserver.unobserve(counter);
+
+}
+
+});
+
+});
+
+counters.forEach(c=>counterObserver.observe(c));
+
+/* FAQ */
+
+document.querySelectorAll(".faq-btn").forEach(btn=>{
+
+btn.onclick=()=>{
+
+btn.parentElement.classList.toggle("active");
+
+};
+
+});
+/*==================================================
+SNOW PARTICLES
+==================================================*/
+
+const snow=document.createElement("div");
+
+snow.className="snow";
+
+document.body.appendChild(snow);
+
+for(let i=0;i<70;i++){
+
+const flake=document.createElement("span");
+
+flake.style.left=Math.random()*100+"%";
+
+flake.style.animationDuration=(6+Math.random()*8)+"s";
+
+flake.style.animationDelay=Math.random()*8+"s";
+
+flake.style.opacity=Math.random();
+
+flake.style.width=(4+Math.random()*8)+"px";
+
+flake.style.height=flake.style.width;
+
+snow.appendChild(flake);
+
+}
+
+/*==================================================
+CURSOR GLOW
+==================================================*/
+
+const glow=document.createElement("div");
+
+glow.className="cursor-glow";
+
+document.body.appendChild(glow);
+
+window.addEventListener("mousemove",(e)=>{
+
+glow.style.left=e.clientX+"px";
+
+glow.style.top=e.clientY+"px";
+
+});
+
+/*==================================================
+SERVICE ACCORDION
+==================================================*/
+
+document.querySelectorAll(".service-toggle").forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+const card=btn.closest(".service-card");
+
+card.classList.toggle("active");
+
+});
+
+});
+
+/*==================================================
+SCROLL REVEAL
+==================================================*/
 
 const revealItems=document.querySelectorAll(
 
-".card,.service,.service-card,.review-card,.brand"
+".service-card,.product-card,.review-card,.counter-box,.gallery-grid img,.feature-box,.card"
 
 );
 
@@ -191,6 +247,8 @@ entries.forEach(entry=>{
 if(entry.isIntersecting){
 
 entry.target.classList.add("show");
+
+revealObserver.unobserve(entry.target);
 
 }
 
@@ -208,198 +266,292 @@ threshold:0.15
 
 revealItems.forEach(item=>{
 
+item.classList.add("fade-up");
+
 revealObserver.observe(item);
 
 });
 
+/*==================================================
+ACTIVE NAV LINK
+==================================================*/
 
-/* ==========================================
-   Counter Animation
-========================================== */
+const currentPage=window.location.pathname.split("/").pop();
 
-const counters=document.querySelectorAll(".stats h2");
+document.querySelectorAll("#navbar a").forEach(link=>{
 
-counters.forEach(counter=>{
+const href=link.getAttribute("href");
 
-const update=()=>{
+if(href===currentPage){
 
-const target=parseInt(counter.innerText);
-
-const current=+(counter.dataset.count||0);
-
-const increment=Math.ceil(target/80);
-
-if(current<target){
-
-const next=Math.min(current+increment,target);
-
-counter.dataset.count=next;
-
-if(counter.innerText.includes("+")){
-
-counter.innerText=next+"+";
-
-}else{
-
-counter.innerText=next;
+link.classList.add("active");
 
 }
-
-requestAnimationFrame(update);
-
-}
-
-};
-
-update();
 
 });
 
+/*==================================================
+SMOOTH INTERNAL SCROLL
+==================================================*/
 
-/* ==========================================
-   Floating Buttons
-========================================== */
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
 
-const whatsapp=document.querySelector(".whatsapp-btn");
+link.addEventListener("click",function(e){
+
+const target=document.querySelector(this.getAttribute("href"));
+
+if(target){
+
+e.preventDefault();
+
+target.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
+}
+
+});
+
+});
+
+/*==================================================
+IMAGE LAZY LOADING
+==================================================*/
+
+document.querySelectorAll("img").forEach(img=>{
+
+img.loading="lazy";
+
+img.decoding="async";
+
+});
+/*==================================================
+ Fine Aircon Jaipur V2
+ Part 3
+==================================================*/
+
+/* ==========================
+ Brand Logo Auto Scroll
+========================== */
+
+const brandSlider=document.querySelector(".brand-slider");
+
+if(brandSlider){
+
+let speed=1;
+
+function autoSlide(){
+
+brandSlider.scrollLeft+=speed;
+
+if(
+
+brandSlider.scrollLeft>=
+
+brandSlider.scrollWidth-
+
+brandSlider.clientWidth
+
+){
+
+brandSlider.scrollLeft=0;
+
+}
+
+requestAnimationFrame(autoSlide);
+
+}
+
+autoSlide();
+
+}
+
+/* ==========================
+ Product Search
+========================== */
+
+const productSearch=document.getElementById("productSearch");
+
+if(productSearch){
+
+productSearch.addEventListener("keyup",function(){
+
+const value=this.value.toLowerCase();
+
+document.querySelectorAll(".product-card").forEach(card=>{
+
+card.style.display=
+
+card.innerText.toLowerCase().includes(value)
+
+?"block":"none";
+
+});
+
+});
+
+}
+
+/* ==========================
+ Service Search
+========================== */
+
+const serviceSearch=document.getElementById("serviceSearch");
+
+if(serviceSearch){
+
+serviceSearch.addEventListener("keyup",function(){
+
+const value=this.value.toLowerCase();
+
+document.querySelectorAll(".service-card").forEach(card=>{
+
+card.style.display=
+
+card.innerText.toLowerCase().includes(value)
+
+?"block":"none";
+
+});
+
+});
+
+}
+
+/* ==========================
+ Booking Form
+========================== */
+
+const bookingForm=document.querySelector("form");
+
+if(bookingForm){
+
+bookingForm.addEventListener("submit",(e)=>{
+
+e.preventDefault();
+
+const name=bookingForm.querySelector("input[type='text']");
+
+const phone=bookingForm.querySelector("input[type='tel']");
+
+if(name && name.value.trim()===""){
+
+alert("Please enter your name.");
+
+name.focus();
+
+return;
+
+}
+
+if(phone && phone.value.trim().length<10){
+
+alert("Please enter a valid mobile number.");
+
+phone.focus();
+
+return;
+
+}
+
+alert("Thank you! Your booking request has been submitted.");
+
+bookingForm.reset();
+
+});
+
+}
+
+/* ==========================
+ WhatsApp Pulse
+========================== */
+
+const whatsapp=document.querySelector(".floating-whatsapp");
 
 if(whatsapp){
 
-whatsapp.addEventListener("click",()=>{
+setInterval(()=>{
 
-console.log("WhatsApp Click");
+whatsapp.animate([
 
-});
+{transform:"scale(1)"},
 
-}
+{transform:"scale(1.12)"},
 
-const callBtn=document.querySelector(".call-btn");
+{transform:"scale(1)"}
 
-if(callBtn){
+],{
 
-callBtn.addEventListener("click",()=>{
-
-console.log("Call Click");
+duration:900
 
 });
 
-}
-/* ==========================================
-   Fine Aircon
-   app.js - Part 3
-========================================== */
-
-/* Search */
-
-const serviceSearch = document.getElementById("serviceSearch");
-
-if (serviceSearch) {
-
-    serviceSearch.addEventListener("keyup", function () {
-
-        const value = this.value.toLowerCase();
-
-        document.querySelectorAll(".service-card").forEach(card => {
-
-            const text = card.innerText.toLowerCase();
-
-            card.style.display =
-                text.includes(value) ? "block" : "none";
-
-        });
-
-    });
+},3500);
 
 }
 
-const productSearch = document.getElementById("productSearch");
+/* ==========================
+ Gallery Lightbox
+========================== */
 
-if (productSearch) {
+document.querySelectorAll(".gallery-grid img").forEach(img=>{
 
-    productSearch.addEventListener("keyup", function () {
+img.addEventListener("click",()=>{
 
-        const value = this.value.toLowerCase();
+const overlay=document.createElement("div");
 
-        document.querySelectorAll(".product-card").forEach(card => {
+overlay.style.cssText=`
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+cursor:pointer;
+`;
 
-            const text = card.innerText.toLowerCase();
+const image=document.createElement("img");
 
-            card.style.display =
-                text.includes(value) ? "block" : "none";
+image.src=img.src;
 
-        });
+image.alt=img.alt;
 
-    });
+image.style.cssText=`
+max-width:90%;
+max-height:90%;
+border-radius:18px;
+box-shadow:0 20px 60px rgba(0,0,0,.5);
+`;
 
-}
+overlay.appendChild(image);
 
-/* Category Filter */
+document.body.appendChild(overlay);
 
-document.querySelectorAll(".category-btn").forEach(btn => {
-
-    btn.addEventListener("click", function () {
-
-        document.querySelectorAll(".category-btn")
-            .forEach(b => b.classList.remove("active"));
-
-        this.classList.add("active");
-
-        const category = this.dataset.category;
-
-        document.querySelectorAll(".service-card,.product-card")
-            .forEach(card => {
-
-                if (category === "all") {
-
-                    card.style.display = "block";
-
-                } else {
-
-                    if (card.dataset.category === category) {
-
-                        card.style.display = "block";
-
-                    } else {
-
-                        card.style.display = "none";
-
-                    }
-
-                }
-
-            });
-
-    });
+overlay.onclick=()=>overlay.remove();
 
 });
 
-/* Contact Form */
+});
 
-const form = document.querySelector("form");
+/* ==========================
+ Footer Year
+========================== */
 
-if (form) {
+const year=document.getElementById("year");
 
-    form.addEventListener("submit", function (e) {
+if(year){
 
-        e.preventDefault();
-
-        alert("Thank you! Your request has been received.");
-
-        form.reset();
-
-    });
+year.textContent=new Date().getFullYear();
 
 }
 
-/* Current Year */
+/* ==========================
+ Console
+========================== */
 
-const year = document.getElementById("year");
-
-if (year) {
-
-    year.textContent = new Date().getFullYear();
-
-}
-
-/* Console */
-
-console.log("Fine Aircon Website Loaded Successfully");
+console.log("✅ Fine Aircon Jaipur V2 Loaded Successfully");
