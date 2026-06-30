@@ -1,0 +1,540 @@
+/*==================================================
+ Fine Aircon Jaipur V2
+ Premium Animation Library
+==================================================*/
+
+/* ==========================
+Fade Up
+========================== */
+
+.fade-up{
+
+opacity:0;
+
+transform:translateY(60px);
+
+transition:all .8s ease;
+
+}
+
+.fade-up.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+/* ==========================
+Fade Left
+========================== */
+
+.fade-left{
+
+opacity:0;
+
+transform:translateX(-70px);
+
+transition:.8s;
+
+}
+
+.fade-left.show{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+/* ==========================
+Fade Right
+========================== */
+
+.fade-right{
+
+opacity:0;
+
+transform:translateX(70px);
+
+transition:.8s;
+
+}
+
+.fade-right.show{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+/* ==========================
+Zoom
+========================== */
+
+.zoom{
+
+opacity:0;
+
+transform:scale(.8);
+
+transition:.8s;
+
+}
+
+.zoom.show{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+/* ==========================
+Hero Floating
+========================== */
+
+.float{
+
+animation:floating 5s ease-in-out infinite;
+
+}
+
+@keyframes floating{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-18px);
+
+}
+
+}
+
+/* ==========================
+Rotate Icon
+========================== */
+
+.rotate{
+
+transition:.4s;
+
+}
+
+.rotate:hover{
+
+transform:rotate(360deg);
+
+}
+
+/* ==========================
+Glow Card
+========================== */
+
+.glow{
+
+transition:.35s;
+
+}
+
+.glow:hover{
+
+box-shadow:
+
+0 0 20px rgba(11,94,215,.25),
+
+0 0 50px rgba(47,164,255,.18);
+
+}
+
+/* ==========================
+Image Zoom
+========================== */
+
+.img-hover{
+
+overflow:hidden;
+
+border-radius:22px;
+
+}
+
+.img-hover img{
+
+transition:.6s;
+
+}
+
+.img-hover:hover img{
+
+transform:scale(1.08);
+
+}
+
+/* ==========================
+Button Pulse
+========================== */
+
+.pulse:hover{
+
+animation:pulse .8s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.05);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+/* ==========================
+Navbar Blur
+========================== */
+
+header.scrolled{
+
+background:rgba(255,255,255,.92);
+
+backdrop-filter:blur(22px);
+
+box-shadow:0 10px 35px rgba(0,0,0,.08);
+
+}
+/*==================================================
+SNOW PARTICLES
+==================================================*/
+
+.snow{
+
+position:fixed;
+
+top:-10px;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+z-index:2;
+
+overflow:hidden;
+
+}
+
+.snow span{
+
+position:absolute;
+
+display:block;
+
+width:8px;
+
+height:8px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.9);
+
+animation:snowFall linear infinite;
+
+box-shadow:0 0 12px rgba(255,255,255,.8);
+
+}
+
+@keyframes snowFall{
+
+0%{
+
+transform:translateY(-10vh);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(110vh);
+
+opacity:0;
+
+}
+
+}
+
+/*==================================================
+MOUSE GLOW
+==================================================*/
+
+.cursor-glow{
+
+position:fixed;
+
+width:260px;
+
+height:260px;
+
+border-radius:50%;
+
+pointer-events:none;
+
+background:radial-gradient(circle,
+rgba(47,164,255,.25) 0%,
+rgba(47,164,255,.10) 40%,
+transparent 75%);
+
+filter:blur(35px);
+
+transform:translate(-50%,-50%);
+
+z-index:1;
+
+transition:transform .05s linear;
+
+}
+
+/*==================================================
+GLASS SHINE
+==================================================*/
+
+.glass{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.glass::before{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+
+left:-60%;
+
+width:60%;
+
+height:320%;
+
+background:linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.45),
+
+transparent
+
+);
+
+transform:rotate(25deg);
+
+transition:.9s;
+
+}
+
+.glass:hover::before{
+
+left:140%;
+
+}
+
+/*==================================================
+BRAND LOGO MARQUEE
+==================================================*/
+
+.brand-slider{
+
+animation:brandScroll 28s linear infinite;
+
+width:max-content;
+
+}
+
+.brand-slider:hover{
+
+animation-play-state:paused;
+
+}
+
+@keyframes brandScroll{
+
+0%{
+
+transform:translateX(0);
+
+}
+
+100%{
+
+transform:translateX(-50%);
+
+}
+
+}
+
+/*==================================================
+GALLERY SHINE
+==================================================*/
+
+.gallery-grid img{
+
+position:relative;
+
+}
+
+.gallery-grid img:hover{
+
+filter:brightness(1.05);
+
+}
+
+/*==================================================
+BORDER GLOW
+==================================================*/
+
+.service-card,
+.product-card{
+
+position:relative;
+
+}
+
+.service-card::after,
+.product-card::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+bottom:0;
+
+width:0;
+
+height:4px;
+
+background:linear-gradient(
+
+90deg,
+
+#0B5ED7,
+
+#29B6FF,
+
+#00E5FF
+
+);
+
+transition:.45s;
+
+}
+
+.service-card:hover::after,
+.product-card:hover::after{
+
+width:100%;
+
+}
+
+/*==================================================
+FLOAT ICON
+==================================================*/
+
+.float-icon{
+
+animation:iconFloat 3.5s ease-in-out infinite;
+
+}
+
+@keyframes iconFloat{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+}
+
+/*==================================================
+TEXT GRADIENT
+==================================================*/
+
+.gradient-text{
+
+background:linear-gradient(
+90deg,
+#0B5ED7,
+#29B6FF,
+#00D9FF
+);
+
+-webkit-background-clip:text;
+
+background-clip:text;
+
+color:transparent;
+
+}
+
+/*==================================================
+HOVER SHADOW
+==================================================*/
+
+.shadow-hover{
+
+transition:.35s;
+
+}
+
+.shadow-hover:hover{
+
+box-shadow:
+
+0 20px 45px rgba(11,94,215,.18);
+
+transform:translateY(-8px);
+
+}
